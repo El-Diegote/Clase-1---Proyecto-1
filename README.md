@@ -1,233 +1,129 @@
 # UCEMA Deck Studio
 
-## Descripcion ejecutiva
+## Qué construí
 
-UCEMA Deck Studio es un prototipo web estatico para crear presentaciones PowerPoint con una identidad visual inspirada en la Universidad del CEMA. La aplicacion permite ingresar con un correo de dominio UCEMA, seleccionar perfil docente o alumno, cargar materiales, generar una vista previa de diapositivas y descargar un archivo `.pptx`.
+Construí un prototipo web estático para crear presentaciones PowerPoint con una identidad visual inspirada en UCEMA. Sirve para cargar documentos, ideas, enlaces y audios, generar una vista previa de slides y descargar un `.pptx`. Está pensado para docentes y alumnos que necesitan transformar materiales académicos en una presentación inicial editable.
 
-El proyecto funciona en el navegador con HTML, CSS y JavaScript. No tiene backend, base de datos ni autenticacion institucional real.
+## Cómo se lo pedí
 
-## Problema que busca resolver
-
-Docentes y alumnos pueden necesitar convertir lecturas, documentos, consignas, enlaces e ideas en una presentacion ordenada. El problema abordado por este prototipo es reducir el trabajo manual inicial de estructurar slides, manteniendo una interfaz simple y una salida editable en PowerPoint.
-
-## Usuarios destinatarios
-
-- Docentes que preparan clases, seminarios, actividades o cierres conceptuales.
-- Alumnos que preparan exposiciones, entregas o defensas breves.
-
-## Funcionalidades principales
-
-Implementado:
-
-- Ingreso con correo de dominio UCEMA y seleccion de perfil `Docente` o `Alumno`.
-- Retorno al inicio de sesion desde la marca `UCEMA` superior izquierda.
-- Carga de archivos por seleccion manual o arrastrar y soltar.
-- Extraccion de texto de documentos compatibles: `TXT`, `MD`, `CSV`, `JSON`, `HTML`, `PDF` y `DOCX`.
-- Carga de audios como insumo de referencia.
-- Grabacion de audio en vivo cuando el navegador y los permisos lo permiten.
-- Ingreso de ideas, consignas y supuestos en texto libre.
-- Ingreso de enlaces y analisis local preventivo de senales de riesgo.
-- Campos configurables: titulo de la presentacion, materia, duracion estimada y estilo.
-- Generacion de slides predictivos a partir del texto disponible.
-- Previsualizacion de cada slide en la pagina.
-- Descarga de un archivo `.pptx` con los mismos slides mostrados en la previsualizacion.
-- Diseno responsive para escritorio y pantallas moviles.
-
-No implementado:
-
-- Autenticacion real contra sistemas internos de UCEMA.
-- Procesamiento profundo de archivos `PPTX` subidos.
-- Transcripcion automatica del audio.
-- Consulta real del contenido de enlaces externos.
-- Servicio externo de reputacion de URLs, ciberseguridad o validacion legal.
-- Persistencia de usuarios, historial o presentaciones generadas.
-
-## Tecnologias utilizadas
-
-- HTML5.
-- CSS3.
-- JavaScript en navegador.
-- [PptxGenJS](https://gitbrent.github.io/PptxGenJS/) mediante CDN para generar archivos `.pptx`.
-- PDF.js mediante CDN para extraer texto de archivos `PDF`.
-- Mammoth.js mediante CDN para extraer texto de archivos `DOCX`.
-
-## Arquitectura general
-
-La aplicacion es estatica y se ejecuta completamente en el navegador:
+Prompts principales usados, en orden:
 
 ```text
-Usuario
-  |
-  v
-index.html
-  |
-  +-- src/styles.css   -> estilos, layout responsive e identidad visual
-  |
-  +-- src/app.js       -> validacion, lectura de documentos, generacion de slides,
-                          previsualizacion, analisis local de enlaces y descarga PPT
-  |
-  +-- CDNs externos    -> PptxGenJS, PDF.js y Mammoth.js
+Quiero inicializar este repositorio como un proyecto organizado y documentado en Markdown.
+
+Creá la siguiente estructura:
+
+- README.md
+- AGENTS.md
+- docs/01-problema.md
+- docs/02-objetivos-y-alcance.md
+- docs/03-requisitos.md
+- docs/04-solucion-propuesta.md
+- docs/05-plan-de-trabajo.md
+- docs/06-decisiones.md
+- docs/07-avances.md
+- src/
+- data/
+
+El proyecto consiste en: [describir aquí la idea].
+
+La documentación debe estar escrita en español, con lenguaje profesional y comprensible. No inventes datos ni requisitos. Cuando falte información, dejá una pregunta pendiente claramente identificada.
+
+Por ahora, no desarrolles la aplicación. Primero organizá la documentación y proponé un plan de trabajo.
 ```
-
-Los archivos cargados se procesan localmente en el navegador. El proyecto no incluye servidor propio ni subida de archivos a un backend.
-
-## Documentacion del proyecto
-
-- [Descripcion funcional](docs/01-descripcion-funcional.md)
-- [Arquitectura](docs/02-arquitectura.md)
-- [Instalacion y configuracion](docs/03-instalacion-y-configuracion.md)
-- [Manual de uso](docs/04-manual-de-uso.md)
-- [Modelo de datos](docs/05-modelo-de-datos.md)
-- [Seguridad](docs/06-seguridad.md)
-- [Pruebas](docs/07-pruebas.md)
-- [Limitaciones](docs/08-limitaciones.md)
-- [Proximos pasos](docs/09-proximos-pasos.md)
-
-## Estructura de carpetas
 
 ```text
-.
-├── .gitignore
-├── AGENTS.md
-├── README.md
-├── index.html
-├── data/
-│   └── .gitkeep
-├── docs/
-│   ├── 01-descripcion-funcional.md
-│   ├── 02-arquitectura.md
-│   ├── 03-instalacion-y-configuracion.md
-│   ├── 04-manual-de-uso.md
-│   ├── 05-modelo-de-datos.md
-│   ├── 06-seguridad.md
-│   ├── 07-pruebas.md
-│   ├── 08-limitaciones.md
-│   ├── 09-proximos-pasos.md
-│   └── documentos de definicion y seguimiento del proyecto
-└── src/
-    ├── .gitkeep
-    ├── app.js
-    └── styles.css
+Ahora sí, quiero crear un aplicativo para crear presentaciones de power point, pero que sea específico de la Universidad del CEMA y que sea apto tanto para docentes como para alumnos.
+Debe contar con botones para subir información: archivos, documentos, lecturas, enlaces, audio con ideas, etc
+Debe contar con boton para descarga de la presentación
+Debe contar con boton para previsualización de la presentación
+Debe contar las ediciones y formatos de PPT predictivos
+Debe tener diseños actuales del Logo, tipografía, paleta de colores y gráficos relacionados con UCEMA
+Debe distinguir entre perfil docente y alumno: para ello, al ingresar en el ''html'' valida mail y/o perfil
 ```
 
-Carpetas locales excluidas por `.gitignore`:
+```text
+Al ingresar como usuario:
+el ''UCEMA'' de arriba a la izquierda tiene que volver a la ventana de inicio de sesión
+A continuación, se debe ver el generador predictivo que contiene:
+1) recuadro para clickear ''+'' y/o arrastrar archivos, documentos ,etc
+2) recuadro para escribir ideas, consignas, supuestos, audios o grabar en vivo un audio sobre lo que va a ser la presentación
+3) enlaces reales para copiar y pegar y que se obtenga la información. Importante: en este ítem que detecte si es una página maliciosa o de contenido ilegal.
+Todo lo que sigue no me sirve. Reemplazalo por campos a rellanar y/o seleccionar que digan:
+a) Título de la presentación
+b) Materia
+c) Duración estimada
+d) Estilo
 
-- `work/`: archivos temporales y pruebas locales.
-- `outputs/`: entregables o plantillas generadas fuera del producto principal.
-- `node_modules/`, entornos virtuales, temporales, `.env`, `.pptx` y `.pdf` generados.
-
-## Requisitos para utilizarlo
-
-Para uso normal:
-
-- Navegador moderno con JavaScript habilitado.
-- Conexion a internet para cargar las librerias desde CDN.
-- Correo con alguno de los dominios aceptados por el prototipo:
-  - `ucema.edu.ar`
-  - `alumnos.ucema.edu.ar`
-  - `mail.ucema.edu.ar`
-
-No se requieren dependencias locales para el uso normal.
-
-## Instrucciones de instalacion
-
-Este proyecto no requiere instalacion de dependencias locales.
-
-1. Obtener una copia del repositorio.
-2. Abrir `index.html` directamente en el navegador.
-3. Verificar que el navegador tenga acceso a internet para cargar las librerias externas desde CDN.
-
-## Variables de entorno necesarias
-
-No hay variables de entorno obligatorias.
-
-El proyecto no debe incluir archivos `.env` ni secretos. El `.gitignore` excluye `.env`, `.env.*`, claves privadas y certificados locales.
-
-## Instrucciones de ejecucion
-
-Abrir el archivo principal desde la carpeta del proyecto:
-
-```powershell
-start .\index.html
+Abajo de todo tiene que haber un recuadro chiquito donde al clickear se hace un previa vista de la presentacion
 ```
 
-Tambien puede abrirse manualmente con doble click sobre `index.html`.
+```text
+Probé subir un documento y no me hace ni la previsualización de los slides del ppt y el archivo que descargo no crear una presentación en power point o pdf sobre ese archivo.
+Necesito que el boton ''previa vista'' haga una previsualización de cada slide o una ventana de cómo se vería. Y quiero que el botón ''descargar ppt'' realmente cree un power point descargable que contenga los slides que hayan analizado y predecido ese documento para que se cree una presentación a partir de la duración que se estima y el estilo que se elige.
+```
 
-## Ejemplos de uso
+```text
+Analizá integralmente este repositorio y creá un README.md profesional en español.
 
-### Crear una presentacion docente
+El contenido debe basarse exclusivamente en los archivos y en el funcionamiento comprobable del proyecto. No inventes funcionalidades.
+```
 
-1. Abrir la aplicacion.
-2. Ingresar un correo con dominio UCEMA.
-3. Elegir perfil `Docente`.
-4. Cargar un documento compatible, por ejemplo `TXT`, `PDF` o `DOCX`.
-5. Completar:
-   - titulo de la presentacion;
-   - materia;
-   - duracion estimada;
-   - estilo.
-6. Clickear `Previa vista`.
-7. Revisar los slides generados.
-8. Clickear `Descargar PPT`.
+```text
+Además del README.md, creá la siguiente documentación:
 
-### Crear una presentacion de alumno
+docs/
+├── 01-descripcion-funcional.md
+├── 02-arquitectura.md
+├── 03-instalacion-y-configuracion.md
+├── 04-manual-de-uso.md
+├── 05-modelo-de-datos.md
+├── 06-seguridad.md
+├── 07-pruebas.md
+├── 08-limitaciones.md
+└── 09-proximos-pasos.md
 
-1. Ingresar con correo UCEMA.
-2. Elegir perfil `Alumno`.
-3. Escribir ideas, consigna o supuestos.
-4. Opcionalmente agregar enlaces o audios de referencia.
-5. Seleccionar una duracion breve, por ejemplo `10 minutos`.
-6. Elegir estilo `Visual y sintetico`.
-7. Generar la vista previa y descargar el `.pptx`.
+Agregá en el README.md un índice con enlaces relativos a estos documentos.
 
-## Pruebas y validaciones disponibles
+Documentá solamente características verificables en el código. Cuando no puedas comprobar algo, marcá la sección como "Pendiente de validación".
+```
 
-No hay una suite automatizada de tests incluida en el repositorio y no existe un script de pruebas versionado.
+## Qué funciona
 
-Validaciones comprobadas durante el desarrollo:
+Funciona el ingreso con correo de dominio UCEMA y selección de perfil `Docente` o `Alumno`. Después del ingreso, la marca `UCEMA` de arriba a la izquierda vuelve a la pantalla inicial.
 
-- Validacion manual en navegador:
-  - ingreso con correo UCEMA;
-  - seleccion de perfil;
-  - generacion de vista previa;
-  - descarga de `.pptx`;
-  - comportamiento responsive basico.
+Funciona la carga de archivos por click o arrastrar y soltar. La aplicación puede extraer texto de `TXT`, `MD`, `CSV`, `JSON`, `HTML`, `PDF` y `DOCX`; otros formatos quedan como referencia. También permite escribir ideas y consignas, adjuntar audio, grabar audio si el navegador lo permite e ingresar enlaces para un análisis local preventivo.
 
-- Validacion tecnica con runtime de Codex:
-  - verificacion de sintaxis de `src/app.js`;
-  - ejecucion temporal con servidor HTTP local;
-  - prueba de flujo en navegador con generacion de previa y descarga.
+Funciona el botón `Previa vista`: genera una previsualización de slides en pantalla a partir del texto disponible, la duración estimada y el estilo elegido. Funciona el botón `Descargar PPT`: genera un `.pptx` descargable con los mismos slides mostrados en la previa.
 
-- Validacion de seguridad local:
-  - busqueda de patrones sensibles como tokens, claves, contrasenas y `.env`;
-  - verificacion de que `work/`, `outputs/`, `.env`, `.pptx` y `.pdf` generados queden excluidos por `.gitignore`.
+Se probó en navegador local el flujo de ingreso, generación de vista previa y descarga de PowerPoint. También se verificó sintaxis de `src/app.js`, comportamiento responsive básico y que `work/`, `outputs/`, `.env`, `.pptx` y `.pdf` generados queden excluidos por `.gitignore`.
 
-## Limitaciones conocidas
+Para usarlo, abrir `index.html` en un navegador con JavaScript e internet habilitados, ingresar un correo UCEMA, cargar materiales, completar título, materia, duración y estilo, clickear `Previa vista` y luego `Descargar PPT`.
 
-- La validacion de usuario solo revisa el dominio del correo y el perfil declarado.
-- No existe autenticacion real contra sistemas de UCEMA.
-- La identidad visual usa una marca tipografica `UCEMA`; no incorpora activos oficiales autorizados.
-- El analisis de enlaces es local y preventivo. No reemplaza un servicio especializado de reputacion, ciberseguridad o cumplimiento legal.
-- Los enlaces no se descargan ni se analizan en profundidad; solo se evalua la URL ingresada.
-- Los audios se adjuntan o graban como referencia, pero no se transcriben.
-- Los archivos `PPTX` subidos no se analizan en profundidad en esta version.
-- La generacion de slides usa reglas locales de extraccion, seleccion de frases y palabras frecuentes. No usa un modelo de IA externo.
-- La aplicacion depende de CDNs para generar `.pptx` y leer `PDF`/`DOCX`.
-- No hay persistencia de datos ni historial.
+## Qué falta o qué falló
 
-## Proximos pasos
+Falta autenticación real contra sistemas de UCEMA. La validación actual solo revisa dominios locales: `ucema.edu.ar`, `alumnos.ucema.edu.ar` y `mail.ucema.edu.ar`.
 
-- Confirmar dominios institucionales definitivos para docentes y alumnos.
-- Reemplazar la marca tipografica por activos UCEMA oficiales si se cuenta con autorizacion.
-- Definir si se requiere autenticacion real.
-- Integrar transcripcion de audio si el flujo lo necesita.
-- Incorporar analisis profundo de `PPTX` subidos.
-- Evaluar un servicio real de seguridad para reputacion de URLs.
-- Agregar una suite automatizada de pruebas.
-- Definir si habra backend, almacenamiento o historial de presentaciones.
+Falta usar activos oficiales autorizados de UCEMA. El logo está representado como marca tipográfica `UCEMA`; no se incorporaron archivos oficiales de marca dentro del repositorio.
 
-## Estado actual del proyecto
+Falta análisis profundo de archivos `PPTX` subidos. La aplicación genera nuevos `.pptx`, pero no interpreta presentaciones cargadas como fuente estructurada.
 
-Estado: prototipo funcional inicial.
+Falta transcripción automática de audio. Los audios se adjuntan o se graban como insumo, pero el contenido hablado no se convierte a texto.
 
-El proyecto permite crear y descargar presentaciones `.pptx` desde una aplicacion web estatica. La funcionalidad principal esta implementada, pero quedan pendientes validaciones institucionales, integraciones reales y automatizacion de pruebas.
+Falta análisis real del contenido de enlaces. El detector actual revisa señales locales de riesgo en la URL, como falta de HTTPS, acortadores, dominios sospechosos y patrones engañosos, pero no consulta un servicio de reputación ni analiza legalmente la página.
+
+Falló al principio la descarga real del PowerPoint porque el CDN usado no exponía el objeto esperado por el navegador. Se corrigió usando el objeto global `PptxGenJS` cuando está disponible.
+
+También falló la primera versión de carga de documentos porque solo usaba los archivos como referencia declarada. Se corrigió agregando extracción de texto para formatos compatibles y conectando esa extracción con la vista previa y el `.pptx` descargado.
+
+En esta máquina, los comandos genéricos `python` y `node` no estaban disponibles en el `PATH` normal. Las validaciones técnicas se hicieron con el runtime incluido en Codex.
+
+## Qué aprendí
+
+Aprendí que trabajar con agentes sirve mejor cuando el pedido se parte en pasos verificables: primero estructura, después interfaz, después comportamiento real y finalmente documentación.
+
+También entendí que una interfaz puede parecer lista aunque todavía no esté conectada a la lógica importante; en este caso, la diferencia fue hacer que el documento subido realmente alimentara los slides.
+
+La documentación ayuda a ordenar el proyecto, pero solo es útil si distingue con honestidad lo implementado de lo pendiente.
+
+El agente puede acelerar mucho el armado, las pruebas y la corrección, pero necesita feedback concreto del usuario para ajustar el producto a lo que realmente se esperaba.
