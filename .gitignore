@@ -1,0 +1,29 @@
+# Credenciales y configuracion local
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependencias
+node_modules/
+.venv/
+venv/
+__pycache__/
+
+# Temporales y salidas locales de Codex
+work/
+outputs/
+tmp/
+temp/
+*.log
+
+# Archivos generados por pruebas o descargas
+*.pptx
+*.pdf
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

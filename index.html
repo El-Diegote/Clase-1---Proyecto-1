@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UCEMA Deck Studio</title>
+    <meta
+      name="description"
+      content="Aplicativo local para crear presentaciones PowerPoint con identidad UCEMA para docentes y alumnos."
+    />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="access-panel" id="accessPanel" aria-labelledby="accessTitle">
+        <div class="brand-lockup" aria-label="Universidad del CEMA">
+          <span class="brand-mark">UCEMA</span>
+          <span class="brand-name">Universidad del CEMA</span>
+        </div>
+
+        <div class="access-grid">
+          <div class="access-copy">
+            <p class="eyebrow">Deck Studio</p>
+            <h1 id="accessTitle">Presentaciones academicas con criterio institucional</h1>
+            <p>
+              Carga materiales, ideas, enlaces y audios para generar una presentacion PowerPoint
+              con estructura predictiva para docentes y alumnos.
+            </p>
+          </div>
+
+          <form class="login-card" id="accessForm">
+            <label for="email">Correo institucional</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="nombre@ucema.edu.ar"
+              required
+            />
+
+            <fieldset>
+              <legend>Perfil</legend>
+              <div class="segmented">
+                <label>
+                  <input type="radio" name="profile" value="docente" checked />
+                  <span>Docente</span>
+                </label>
+                <label>
+                  <input type="radio" name="profile" value="alumno" />
+                  <span>Alumno</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <button class="primary-action" type="submit">Ingresar</button>
+            <p class="form-note" id="accessMessage" role="status">
+              Se valida dominio UCEMA y perfil declarado.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <section class="workspace hidden" id="workspace" aria-label="Generador predictivo UCEMA">
+        <header class="workspace-header">
+          <button class="brand-lockup compact brand-button" id="homeButton" type="button" aria-label="Volver al inicio de sesion">
+            <span class="brand-mark">UCEMA</span>
+            <span class="brand-name">Deck Studio</span>
+          </button>
+          <div class="user-chip" id="userChip"></div>
+        </header>
+
+        <section class="builder">
+          <div class="builder-title">
+            <p class="eyebrow">Generador predictivo</p>
+            <h2>Crear presentacion UCEMA</h2>
+          </div>
+
+          <section class="predictive-grid" id="inputs">
+            <article class="input-card upload-card" id="dropZone">
+              <label class="upload-zone" for="files">
+                <span class="upload-icon">+</span>
+                <strong>Archivos y documentos</strong>
+                <span>Click o arrastra PDF, DOCX, PPTX, TXT, CSV y otros materiales.</span>
+                <input id="files" type="file" multiple />
+              </label>
+              <div class="asset-list" id="assetList" aria-live="polite"></div>
+              <div class="analysis-status" id="analysisStatus" aria-live="polite">
+                Subi un documento y clickea Previa vista para analizarlo.
+              </div>
+            </article>
+
+            <article class="input-card">
+              <label for="brief">
+                Ideas, consignas, supuestos y audio
+                <textarea
+                  id="brief"
+                  rows="8"
+                  placeholder="Escribi ideas, consigna, supuestos, objetivo de la clase o enfoque de la presentacion."
+                ></textarea>
+              </label>
+
+              <div class="audio-tools">
+                <label class="secondary-upload" for="audio">
+                  Adjuntar audio
+                  <input id="audio" type="file" accept="audio/*" multiple />
+                </label>
+                <button class="ghost-action" type="button" id="recordBtn">Grabar audio</button>
+              </div>
+              <p class="form-note" id="recordStatus" role="status">La grabacion en vivo depende del permiso del navegador.</p>
+            </article>
+
+            <article class="input-card">
+              <label for="links">
+                Enlaces reales
+                <textarea id="links" rows="8" placeholder="https://ucema.edu.ar/...&#10;https://..."></textarea>
+              </label>
+              <button class="ghost-action" type="button" id="scanLinksBtn">Analizar enlaces</button>
+              <div class="link-report" id="linkReport" aria-live="polite"></div>
+            </article>
+          </section>
+
+          <section class="form-panel" aria-label="Campos de presentacion">
+            <div class="field-grid">
+              <label>
+                Titulo de la presentacion
+                <input id="deckTitle" type="text" value="Presentacion UCEMA" />
+              </label>
+
+              <label>
+                Materia
+                <input id="course" type="text" placeholder="Ej.: Finanzas, Economia, Management" />
+              </label>
+
+              <label>
+                Duracion estimada
+                <select id="duration">
+                  <option value="10">10 minutos</option>
+                  <option value="20" selected>20 minutos</option>
+                  <option value="40">40 minutos</option>
+                </select>
+              </label>
+
+              <label>
+                Estilo
+                <select id="tone">
+                  <option value="academico" selected>Academico</option>
+                  <option value="ejecutivo">Ejecutivo</option>
+                  <option value="visual">Visual y sintetico</option>
+                </select>
+              </label>
+            </div>
+          </section>
+
+          <button class="preview-tile" type="button" id="previewBtn">
+            <span>Previa vista</span>
+            <strong>Click para generar la vista previa de la presentacion</strong>
+          </button>
+
+          <section class="preview-panel hidden" id="slides" aria-label="Previsualizacion de presentacion">
+            <div class="preview-header">
+              <div>
+                <p class="eyebrow">Previsualizacion</p>
+                <h3>Vista previa de la presentacion</h3>
+              </div>
+              <button class="primary-action" type="button" id="downloadBtn">Descargar PPT</button>
+            </div>
+            <div class="slide-strip" id="slideStrip"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs/dist/pptxgen.bundle.js"></script>
+    <script type="module">
+      import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
+      window.pdfjsLib = pdfjsLib;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+    <script src="src/app.js"></script>
+  </body>
+</html>
