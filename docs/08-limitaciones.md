@@ -26,8 +26,9 @@
 
 ## Limitaciones de marca
 
-- La marca `UCEMA` se representa tipograficamente.
-- No se incorporan activos oficiales autorizados dentro del repositorio.
+- La marca `UCEMA` se representa mayormente de forma tipografica dentro de la app y del PPT generado.
+- Se incorporo un fondo visual extraido del PPT provisto como referencia.
+- Sigue pendiente validar autorizacion institucional para uso publico o productivo de los activos visuales UCEMA.
 
 ## Limitaciones tecnicas
 

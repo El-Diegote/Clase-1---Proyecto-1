@@ -1,0 +1,8 @@
+{
+  "fecha": "2026-09-12",
+  "tipo": "caso de seguridad local documentado",
+  "herramientas": [
+    "clasificador local de URL en src/app.js"
+  ],
+  "limitacion": "No consulta reputacion real de URL ni analiza contenido de la pagina."
+}

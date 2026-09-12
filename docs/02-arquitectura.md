@@ -16,7 +16,8 @@ src/styles.css
   ├── layout responsive
   ├── estilos de login
   ├── estilos del generador predictivo
-  └── estilos de previsualizacion de slides
+  ├── estilos de previsualizacion de slides
+  └── paleta y patrones visuales derivados del PPT de referencia
 
 src/app.js
   ├── estado en memoria
@@ -27,6 +28,9 @@ src/app.js
   ├── generacion de slides
   ├── previsualizacion
   └── descarga PPT
+
+src/assets/
+  └── asset visual extraido del PPT de referencia para fondo de portada
 ```
 
 ## Dependencias externas

@@ -1,0 +1,5 @@
+{
+  "resultado_esperado": "La aplicacion acepta el ingreso, combina el texto escrito con el documento de ejemplo, genera una presentacion breve y permite descargar un PPTX.",
+  "estado": "pendiente de reproduccion automatizada versionada",
+  "observacion": "El comportamiento equivalente fue comprobado durante el desarrollo en viewport movil."
+}

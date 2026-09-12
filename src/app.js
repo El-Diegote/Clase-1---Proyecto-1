@@ -40,6 +40,17 @@ const stopwords = new Set([
 const riskyShorteners = new Set(["bit.ly", "tinyurl.com", "t.co", "goo.gl", "ow.ly", "is.gd", "cutt.ly"]);
 const suspiciousTlds = new Set(["zip", "mov", "top", "click", "country", "gq", "tk"]);
 const illegalContentSignals = ["pirateria", "crack", "warez", "doxxing", "abuso", "explotacion", "ilegal"];
+const templateColors = {
+  burgundy: "950028",
+  burgundyDark: "3A0010",
+  rose: "D92D5B",
+  paper: "F0EDF2",
+  grey: "BFBFBF",
+  lightGrey: "E7E6E6",
+  text: "44546A",
+  black: "19171A",
+  white: "FFFFFF",
+};
 
 const accessPanel = document.querySelector("#accessPanel");
 const workspace = document.querySelector("#workspace");
@@ -202,7 +213,7 @@ function renderSlides() {
   slideStrip.innerHTML = state.slides
     .map(
       (slide, index) => `
-        <article class="slide-card">
+        <article class="slide-card layout-${escapeHtml(slide.layout || "content")}">
           <div class="slide-header">
             <span>UCEMA</span>
             <span>${index + 1}/${state.slides.length}</span>
@@ -328,6 +339,7 @@ function buildSlidesFromAnalysis() {
   const slides = [];
 
   slides.push({
+    layout: "cover",
     title,
     points: [
       `Materia: ${subject}`,
@@ -340,6 +352,7 @@ function buildSlidesFromAnalysis() {
   });
 
   slides.push({
+    layout: "title",
     title: isTeacher ? "Objetivo de aprendizaje" : "Objetivo de la exposicion",
     points: pickBullets(sentences, bulletLimit, [
       isTeacher
@@ -356,6 +369,7 @@ function buildSlidesFromAnalysis() {
 
   chunks.forEach((chunk, index) => {
     slides.push({
+      layout: index === 1 ? "section" : "content",
       title: getContentSlideTitle(index, keywords),
       points: pickBullets(chunk, bulletLimit, [`Punto principal ${index + 1} pendiente de completar con mas contenido legible.`]),
       footer: tone.value === "ejecutivo" ? "Sintesis ejecutiva" : "Desarrollo academico",
@@ -363,6 +377,7 @@ function buildSlidesFromAnalysis() {
   });
 
   slides.push({
+    layout: "chart",
     title: "Grafico o visual sugerido",
     points: [
       keywords.length ? `Mapa conceptual: ${keywords.slice(0, 4).join(" / ")}.` : "Mapa conceptual de conceptos centrales.",
@@ -373,6 +388,7 @@ function buildSlidesFromAnalysis() {
   });
 
   slides.push({
+    layout: "closing",
     title: isTeacher ? "Cierre y actividad" : "Conclusion",
     points: isTeacher
       ? [
@@ -390,6 +406,7 @@ function buildSlidesFromAnalysis() {
 
   if (state.extractedDocs.some((doc) => doc.warning)) {
     slides.push({
+      layout: "content",
       title: "Advertencias de lectura",
       points: state.extractedDocs
         .filter((doc) => doc.warning)
@@ -582,85 +599,284 @@ async function downloadPpt() {
   pptx.company = "Universidad del CEMA";
   pptx.lang = "es-AR";
   pptx.theme = {
-    headFontFace: "Arial",
-    bodyFontFace: "Arial",
+    headFontFace: "Acumin Pro",
+    bodyFontFace: "Acumin Pro",
     lang: "es-AR",
   };
 
   state.slides.forEach((item, index) => {
     const slide = pptx.addSlide();
-    slide.background = { color: "FBFAF9" };
-    slide.addShape(pptx.ShapeType.rect, {
-      x: 0,
-      y: 0,
-      w: 13.333,
-      h: 0.72,
-      fill: { color: "940028" },
-      line: { color: "940028" },
-    });
-    slide.addText("UCEMA", {
-      x: 0.42,
-      y: 0.16,
-      w: 1.35,
-      h: 0.3,
-      color: "FFFFFF",
-      bold: true,
-      fontSize: 15,
-      margin: 0,
-    });
-    slide.addText(`${index + 1}/${state.slides.length}`, {
-      x: 12.1,
-      y: 0.16,
-      w: 0.8,
-      h: 0.3,
-      color: "FFFFFF",
-      fontSize: 10,
-      align: "right",
-      margin: 0,
-    });
-    slide.addText(item.title, {
-      x: 0.65,
-      y: 1.05,
-      w: 11.8,
-      h: 0.78,
-      color: "19171A",
-      bold: true,
-      fontSize: 28,
-      margin: 0,
-      breakLine: false,
-      fit: "shrink",
-    });
-    slide.addText(item.points.map((point) => ({ text: point, options: { bullet: { type: "ul" } } })), {
-      x: 0.82,
-      y: 2.0,
-      w: 11.2,
-      h: 3.75,
-      color: "19171A",
-      fontSize: tone.value === "visual" ? 20 : 17,
-      breakLine: false,
-      fit: "shrink",
-      paraSpaceAfterPt: 8,
-    });
-    slide.addShape(pptx.ShapeType.line, {
-      x: 0.65,
-      y: 6.7,
-      w: 12,
-      h: 0,
-      line: { color: "DED8DD", width: 1 },
-    });
-    slide.addText(item.footer, {
-      x: 0.65,
-      y: 6.86,
-      w: 6,
-      h: 0.24,
-      color: "6F6870",
-      fontSize: 9,
-      margin: 0,
-    });
+    drawTemplateSlide(pptx, slide, item, index);
   });
 
   const safeName = (deckTitle.value || "presentacion-ucema").toLowerCase().replace(/[^a-z0-9]+/g, "-");
   await pptx.writeFile({ fileName: `${safeName}.pptx` });
+}
+
+function drawTemplateSlide(pptx, slide, item, index) {
+  const layout = item.layout || "content";
+  const isCover = layout === "cover";
+  const isTitle = layout === "title";
+  const isSection = layout === "section";
+  const isChart = layout === "chart";
+  const isClosing = layout === "closing";
+
+  if (isCover) {
+    slide.background = { color: templateColors.burgundy };
+    slide.addShape(pptx.ShapeType.rect, {
+      x: 0,
+      y: 0,
+      w: 2.8,
+      h: 7.5,
+      fill: { color: templateColors.burgundyDark, transparency: 18 },
+      line: { color: templateColors.burgundyDark, transparency: 100 },
+    });
+    slide.addShape(pptx.ShapeType.rect, {
+      x: 1.25,
+      y: 1.55,
+      w: 2.45,
+      h: 1.7,
+      fill: { color: templateColors.burgundy },
+      line: { color: templateColors.burgundy },
+    });
+    addUcemaLogo(slide, 1.44, 1.86, 1.55, 0.8);
+    slide.addText(item.title, {
+      x: 7.3,
+      y: 2.95,
+      w: 4.7,
+      h: 0.7,
+      color: templateColors.white,
+      bold: true,
+      fontSize: 31,
+      fit: "shrink",
+      margin: 0,
+    });
+    slide.addText(item.points.join("\n"), {
+      x: 7.35,
+      y: 3.78,
+      w: 4.4,
+      h: 1.4,
+      color: templateColors.white,
+      fontSize: 14,
+      fit: "shrink",
+      margin: 0,
+      breakLine: false,
+    });
+    return;
+  }
+
+  if (isTitle) {
+    slide.background = { color: templateColors.white };
+    slide.addShape(pptx.ShapeType.rect, {
+      x: 0,
+      y: 0,
+      w: 10.65,
+      h: 7.5,
+      fill: { color: templateColors.burgundy },
+      line: { color: templateColors.burgundy },
+    });
+    slide.addShape(pptx.ShapeType.rect, {
+      x: 0,
+      y: 0,
+      w: 4.1,
+      h: 7.5,
+      fill: { color: templateColors.rose, transparency: 35 },
+      line: { color: templateColors.rose, transparency: 100 },
+    });
+    addUcemaLogo(slide, 11.05, 0.34, 1.0, 0.52);
+    slide.addText(item.title, {
+      x: 0.72,
+      y: 3.58,
+      w: 6.7,
+      h: 0.95,
+      color: templateColors.white,
+      bold: true,
+      fontSize: 32,
+      fit: "shrink",
+      margin: 0,
+    });
+    slide.addText(item.points.slice(0, 3).join("\n"), {
+      x: 0.72,
+      y: 4.72,
+      w: 7.0,
+      h: 1.25,
+      color: templateColors.white,
+      fontSize: 14,
+      fit: "shrink",
+      margin: 0,
+    });
+    return;
+  }
+
+  slide.background = { color: templateColors.white };
+
+  if (isSection) {
+    slide.addShape(pptx.ShapeType.rect, {
+      x: 6.9,
+      y: 0,
+      w: 6.43,
+      h: 7.5,
+      fill: { color: templateColors.burgundy },
+      line: { color: templateColors.burgundy },
+    });
+    addUcemaLogo(slide, 0.18, 0.18, 0.9, 0.48);
+    slide.addShape(pptx.ShapeType.line, {
+      x: 0.95,
+      y: 3.35,
+      w: 4.15,
+      h: 0,
+      line: { color: templateColors.burgundy, width: 1 },
+    });
+    slide.addText(item.title, {
+      x: 0.95,
+      y: 3.52,
+      w: 4.6,
+      h: 0.95,
+      color: templateColors.burgundy,
+      bold: true,
+      fontSize: 28,
+      fit: "shrink",
+      margin: 0,
+    });
+    slide.addText(item.points.slice(0, 4).join("\n"), {
+      x: 7.55,
+      y: 1.32,
+      w: 4.1,
+      h: 3.9,
+      color: templateColors.white,
+      fontSize: 14,
+      fit: "shrink",
+      margin: 0,
+    });
+    return;
+  }
+
+  slide.addShape(pptx.ShapeType.rect, {
+    x: 11.58,
+    y: 0,
+    w: 1.75,
+    h: 7.5,
+    fill: { color: isClosing ? templateColors.white : templateColors.grey },
+    line: { color: isClosing ? templateColors.white : templateColors.grey },
+  });
+  addUcemaLogo(slide, 11.08, isClosing ? 5.55 : 0.28, 0.92, 0.48);
+
+  if (isChart) {
+    slide.addText(item.title, {
+      x: 0.7,
+      y: 0.58,
+      w: 6.0,
+      h: 0.35,
+      color: templateColors.burgundy,
+      bold: true,
+      fontSize: 15,
+      margin: 0,
+    });
+    slide.addShape(pptx.ShapeType.rect, {
+      x: 0.7,
+      y: 1.45,
+      w: 5.6,
+      h: 3.58,
+      fill: { color: templateColors.paper },
+      line: { color: templateColors.paper },
+    });
+    slide.addText("Espacio para grafico o foto", {
+      x: 1.62,
+      y: 3.0,
+      w: 3.8,
+      h: 0.4,
+      color: templateColors.text,
+      fontSize: 12,
+      align: "center",
+      margin: 0,
+    });
+    slide.addText(item.points.join("\n"), {
+      x: 7.02,
+      y: 2.05,
+      w: 3.55,
+      h: 2.8,
+      color: templateColors.burgundy,
+      fontSize: 13,
+      fit: "shrink",
+      margin: 0,
+    });
+  } else if (isClosing) {
+    slide.addText("¡Muchas gracias!", {
+      x: 0.65,
+      y: 1.18,
+      w: 7.1,
+      h: 0.6,
+      color: templateColors.burgundy,
+      fontSize: 30,
+      margin: 0,
+    });
+    slide.addText(item.points.join("\n"), {
+      x: 0.68,
+      y: 2.25,
+      w: 7.1,
+      h: 2.2,
+      color: templateColors.text,
+      fontSize: 16,
+      fit: "shrink",
+      margin: 0,
+    });
+  } else {
+    slide.addText(item.title, {
+      x: 0.72,
+      y: 0.68,
+      w: 6.8,
+      h: 0.52,
+      color: templateColors.burgundy,
+      bold: true,
+      fontSize: 18,
+      fit: "shrink",
+      margin: 0,
+    });
+    slide.addText(item.points.map((point) => ({ text: point, options: { bullet: { type: "ul" } } })), {
+      x: 0.76,
+      y: 1.42,
+      w: 9.4,
+      h: 4.65,
+      color: templateColors.burgundy,
+      fontSize: tone.value === "visual" ? 18 : 15,
+      fit: "shrink",
+      paraSpaceAfterPt: 7,
+      margin: 0,
+    });
+  }
+
+  slide.addText(item.footer, {
+    x: 0.7,
+    y: 6.6,
+    w: 5.7,
+    h: 0.22,
+    color: templateColors.grey,
+    fontSize: 9,
+    margin: 0,
+  });
+}
+
+function addUcemaLogo(slide, x, y, w, h) {
+  slide.addShape("rect", {
+    x,
+    y,
+    w,
+    h,
+    fill: { color: templateColors.burgundy },
+    line: { color: templateColors.burgundy },
+  });
+  slide.addText("UCEMA", {
+    x: x + w * 0.12,
+    y: y + h * 0.34,
+    w: w * 0.76,
+    h: h * 0.34,
+    color: templateColors.white,
+    bold: true,
+    fontSize: Math.max(8, h * 22),
+    align: "center",
+    margin: 0,
+    fit: "shrink",
+  });
 }
 
 function truncate(text, length) {

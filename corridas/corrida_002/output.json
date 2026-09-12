@@ -1,0 +1,5 @@
+{
+  "resultado_esperado": "La aplicacion marca la URL como advertencia por no usar HTTPS, usar acortador y coincidir con patron sospechoso.",
+  "estado": "pendiente de reproduccion automatizada versionada",
+  "accion_humana": "Revisar el enlace antes de usarlo como fuente."
+}

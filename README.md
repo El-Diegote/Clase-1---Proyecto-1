@@ -4,6 +4,8 @@
 
 Construí un prototipo web estático para crear presentaciones PowerPoint con una identidad visual inspirada en UCEMA. Sirve para cargar documentos, ideas, enlaces y audios, generar una vista previa de slides y descargar un `.pptx`. Está pensado para docentes y alumnos que necesitan transformar materiales académicos en una presentación inicial editable.
 
+Después incorporé como referencia visual el archivo `PesentacionUCEMA.pptx`: paleta borgoña `#950028`, grises institucionales, tipografía de referencia `Acumin Pro` con fallback, portada visual y estructura de slides tipo portada, contenido, sección, gráfico/foto y cierre.
+
 ## Cómo se lo pedí
 
 Prompts principales usados, en orden:
@@ -88,6 +90,10 @@ Agregá en el README.md un índice con enlaces relativos a estos documentos.
 Documentá solamente características verificables en el código. Cuando no puedas comprobar algo, marcá la sección como "Pendiente de validación".
 ```
 
+```text
+Pasé el trabajo por un evaluador/corrector experto y me arrojó el siguiente resultado. Quiero que revises lo que me indica y hagas retoques y modificaciones que consideres oportunas para que optimicen el resultado
+```
+
 ## Qué funciona
 
 Funciona el ingreso con correo de dominio UCEMA y selección de perfil `Docente` o `Alumno`. Después del ingreso, la marca `UCEMA` de arriba a la izquierda vuelve a la pantalla inicial.
@@ -96,15 +102,30 @@ Funciona la carga de archivos por click o arrastrar y soltar. La aplicación pue
 
 Funciona el botón `Previa vista`: genera una previsualización de slides en pantalla a partir del texto disponible, la duración estimada y el estilo elegido. Funciona el botón `Descargar PPT`: genera un `.pptx` descargable con los mismos slides mostrados en la previa.
 
+Funciona la aplicación de tonos y estructura visual derivados del PPT de referencia: la interfaz usa la paleta borgoña/gris y la descarga de PowerPoint usa layouts diferenciados para portada, título, contenido, sección, gráfico y cierre.
+
 Se probó en navegador local el flujo de ingreso, generación de vista previa y descarga de PowerPoint. También se verificó sintaxis de `src/app.js`, comportamiento responsive básico y que `work/`, `outputs/`, `.env`, `.pptx` y `.pdf` generados queden excluidos por `.gitignore`.
 
 Para usarlo, abrir `index.html` en un navegador con JavaScript e internet habilitados, ingresar un correo UCEMA, cargar materiales, completar título, materia, duración y estilo, clickear `Previa vista` y luego `Descargar PPT`.
+
+Evidencia y documentación complementaria agregada para mejorar la evaluación del proyecto:
+
+- [`prompts/system_prompt.md`](prompts/system_prompt.md): contrato de trabajo del proyecto con ejemplos explícitos de caso normal y caso de escalamiento.
+- [`prompts/user_prompt.md`](prompts/user_prompt.md): prompts principales usados durante la construcción.
+- [`docs/10-ejemplos.md`](docs/10-ejemplos.md): ejemplos funcionales verificables y pendientes de validación.
+- [`docs/ECONOMIA.md`](docs/ECONOMIA.md): costo actual por corrida, proyección y límites de la estimación.
+- [`docs/GOBIERNO_Y_RIESGOS.md`](docs/GOBIERNO_Y_RIESGOS.md): permisos, supervisión humana, riesgos y responsable de revisión.
+- [`DECISIONES.md`](DECISIONES.md): historia del proceso en la raíz, como pide la consigna del trabajo final.
+- [`corridas/corrida_001/`](corridas/corrida_001/): caso documentado de docente con documento de texto.
+- [`corridas/corrida_002/`](corridas/corrida_002/): caso documentado de enlace sospechoso.
+- [`corridas/corrida_003/`](corridas/corrida_003/): caso documentado de alumno con presentación breve.
+- [`scripts/validar-estructura.ps1`](scripts/validar-estructura.ps1): validación local de estructura documental y búsqueda básica de posibles secretos.
 
 ## Qué falta o qué falló
 
 Falta autenticación real contra sistemas de UCEMA. La validación actual solo revisa dominios locales: `ucema.edu.ar`, `alumnos.ucema.edu.ar` y `mail.ucema.edu.ar`.
 
-Falta usar activos oficiales autorizados de UCEMA. El logo está representado como marca tipográfica `UCEMA`; no se incorporaron archivos oficiales de marca dentro del repositorio.
+Falta validar formalmente el uso institucional de los activos visuales. Se incorporó un fondo extraído del PPT provisto como referencia, pero sigue pendiente confirmar autorización de marca para uso público o productivo.
 
 Falta análisis profundo de archivos `PPTX` subidos. La aplicación genera nuevos `.pptx`, pero no interpreta presentaciones cargadas como fuente estructurada.
 
@@ -117,6 +138,10 @@ Falló al principio la descarga real del PowerPoint porque el CDN usado no expon
 También falló la primera versión de carga de documentos porque solo usaba los archivos como referencia declarada. Se corrigió agregando extracción de texto para formatos compatibles y conectando esa extracción con la vista previa y el `.pptx` descargado.
 
 En esta máquina, los comandos genéricos `python` y `node` no estaban disponibles en el `PATH` normal. Las validaciones técnicas se hicieron con el runtime incluido en Codex.
+
+La evidencia agregada por recomendación del evaluador no convierte el prototipo en un sistema productivo. Sirve para que el contrato, los ejemplos y las corridas queden localizables y auditables dentro del repositorio.
+
+La consigna del trabajo final pide un sistema agentico. El proyecto actual se documenta como prototipo agentico local y deterministico: toma entradas, usa herramientas del navegador, aplica reglas de analisis y genera una salida estructurada en slides/PPTX. No usa todavia un LLM externo ni una API de IA generativa; esa limitacion queda declarada en la documentacion economica y de proximos pasos.
 
 ## Qué aprendí
 

@@ -1,0 +1,9 @@
+Transformacion digital en universidades privadas.
+
+La Universidad del CEMA necesita mejorar la produccion de presentaciones academicas para docentes y alumnos. El problema central es que los materiales de clase, lecturas, consignas y enlaces quedan dispersos en distintos formatos.
+
+La solucion propuesta es un generador predictivo de presentaciones que analice documentos, detecte ejes conceptuales y produzca slides con estructura clara. El sistema debe diferenciar entre clases docentes y exposiciones de alumnos.
+
+Los criterios de exito son consistencia institucional, ahorro de tiempo, claridad narrativa y posibilidad de descargar un PowerPoint editable. La herramienta debe advertir riesgos en enlaces y evitar el uso de contenido no validado.
+
+Para una clase de cuarenta minutos se recomienda una apertura, objetivos de aprendizaje, desarrollo conceptual, evidencia, grafico sugerido, actividad de cierre y bibliografia.

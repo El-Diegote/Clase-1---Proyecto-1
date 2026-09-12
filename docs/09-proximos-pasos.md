@@ -4,7 +4,7 @@
 
 - Confirmar dominios institucionales definitivos para docentes y alumnos.
 - Definir si se requiere autenticacion real.
-- Confirmar permisos para utilizar activos oficiales UCEMA.
+- Confirmar permisos para utilizar activos visuales UCEMA y el material extraido del PPT de referencia.
 - Definir politica de uso de documentos con informacion sensible.
 
 ## Prioridad media

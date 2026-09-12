@@ -1,0 +1,9 @@
+{
+  "caso": "docente_documento_txt",
+  "email": "profesor@ucema.edu.ar",
+  "perfil": "Docente",
+  "archivo": "data/ejemplo-docente.txt",
+  "materia": "Innovacion Educativa",
+  "duracion": "40",
+  "estilo": "academico"
+}

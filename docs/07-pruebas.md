@@ -29,6 +29,22 @@ Comprobado durante el desarrollo:
 - `.gitignore` excluye `work/`, `outputs/`, `.env`, `.pptx` y `.pdf` generados.
 - Se revisaron patrones frecuentes de secretos en archivos versionables.
 
+## Validacion reproducible agregada
+
+Se agrego el script `scripts/validar-estructura.ps1` para revisar:
+
+- presencia de README, AGENTS, documentacion funcional, prompts y corridas documentadas;
+- presencia de archivos base de la aplicacion;
+- busqueda basica de patrones frecuentes asociados a secretos.
+
+Comando:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/validar-estructura.ps1
+```
+
+Esta validacion no reemplaza las pruebas funcionales en navegador ni verifica que el PPT descargado abra correctamente en Microsoft PowerPoint.
+
 ## Pendiente de validacion
 
 - Pruebas automatizadas versionadas.

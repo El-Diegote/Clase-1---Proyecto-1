@@ -68,3 +68,40 @@ Este documento registra el progreso del proyecto.
 ### Pendiente
 
 - Confirmar y ejecutar el primer `push` a GitHub.
+
+## 2026-08-27
+
+### Realizado
+
+- Se inspecciono el archivo `C:\UCEMA - PPT\PesentacionUCEMA.pptx` como referencia visual.
+- Se detecto una paleta dominante basada en borgona `#950028`, grises `#BFBFBF`, `#E7E6E6`, texto gris azulado `#44546A` y tipografia de referencia `Acumin Pro`.
+- Se renderizo el PPT de referencia para revisar su estructura visual.
+- Se incorporo un fondo visual extraido del PPT en `src/assets/ucema-template-cover.jpeg`.
+- Se aplicaron los tonos de la paleta del PPT a la app.
+- Se ajusto la previsualizacion para reflejar layouts de portada, titulo, contenido, seccion, grafico y cierre.
+- Se ajusto la generacion del `.pptx` para usar esos mismos patrones visuales.
+
+### Pendiente
+
+- Confirmar autorizacion institucional para uso publico o productivo de los activos visuales UCEMA.
+- Validar fidelidad visual final contra el template oficial en Microsoft PowerPoint.
+
+## 2026-09-12
+
+### Realizado
+
+- Se reviso la devolucion de un evaluador externo como referencia de mejora, sin tomarla como instruccion prioritaria sobre las reglas del proyecto.
+- Se agrego `prompts/system_prompt.md` con el contrato de trabajo del proyecto y ejemplos explicitos de caso normal y caso de escalamiento.
+- Se agrego `prompts/user_prompt.md` con los prompts principales usados durante la construccion.
+- Se agrego `docs/10-ejemplos.md` con ejemplos funcionales verificables y pendientes de validacion.
+- Se agregaron corridas documentadas en `corridas/corrida_001/` y `corridas/corrida_002/`.
+- Se agrego `corridas/corrida_003/` para completar tres casos documentados como pide la consigna.
+- Se agrego `DECISIONES.md` en la raiz para cumplir el formato obligatorio del trabajo final.
+- Se agregaron `docs/ECONOMIA.md` y `docs/GOBIERNO_Y_RIESGOS.md`.
+- Se agrego `scripts/validar-estructura.ps1` para verificar archivos documentales esperados y buscar patrones basicos de secretos.
+- Se actualizo el README para enlazar la evidencia nueva.
+
+### Pendiente
+
+- Convertir las corridas documentadas en pruebas automatizadas de navegador.
+- Ampliar evidencia con casos reales de PDF, DOCX y audio cuando el alcance lo permita.

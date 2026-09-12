@@ -1,0 +1,5 @@
+Presentacion breve sobre gestion academica.
+
+El objetivo es explicar un problema, presentar una hipotesis y sostener una conclusion con evidencia. La exposicion debe ser clara, visual y sintetica.
+
+La estructura recomendada incluye problema, contexto, evidencia, analisis y conclusion. Tambien conviene explicitar limitaciones y preguntas abiertas para la discusion.

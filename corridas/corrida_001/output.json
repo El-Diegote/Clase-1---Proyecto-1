@@ -1,0 +1,5 @@
+{
+  "resultado_esperado": "La aplicacion acepta el ingreso, lee el documento TXT, genera vista previa con slides y permite descargar un PPTX.",
+  "estado": "pendiente de reproduccion automatizada versionada",
+  "observacion": "El comportamiento fue comprobado durante el desarrollo con un documento de prueba equivalente."
+}

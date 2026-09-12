@@ -1,0 +1,9 @@
+{
+  "caso": "alumno_ideas_texto",
+  "email": "alumno@alumnos.ucema.edu.ar",
+  "perfil": "Alumno",
+  "archivo": "data/ejemplo-alumno.txt",
+  "materia": "Gestion de Proyectos",
+  "duracion": "10",
+  "estilo": "visual"
+}

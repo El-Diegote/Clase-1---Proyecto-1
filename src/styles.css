@@ -1,14 +1,18 @@
 :root {
-  --ucema-burgundy: #940028;
+  --ucema-burgundy: #950028;
+  --ucema-burgundy-dark: #3a0010;
+  --ucema-burgundy-mid: #6d001e;
+  --ucema-rose: #d92d5b;
   --ink: #19171a;
-  --muted: #6f6870;
+  --muted: #44546a;
   --line: #ded8dd;
-  --paper: #fbfaf9;
+  --paper: #f0edf2;
   --surface: #ffffff;
-  --mist: #f3eef1;
-  --cyan: #007c89;
-  --gold: #c89b3c;
-  --green: #27755d;
+  --mist: #e7e6e6;
+  --rail: #bfbfbf;
+  --cyan: #44546a;
+  --gold: #b88a32;
+  --green: #476f41;
   --danger: #b42318;
   --shadow: 0 18px 50px rgba(25, 23, 26, 0.12);
   color-scheme: light;
@@ -25,7 +29,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Acumin Pro", "Aptos", Arial, Helvetica, sans-serif;
   color: var(--ink);
   background: var(--paper);
 }
@@ -56,8 +60,8 @@ button {
   flex-direction: column;
   gap: 42px;
   background:
-    linear-gradient(90deg, rgba(148, 0, 40, 0.96), rgba(148, 0, 40, 0.78)),
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0 1px, transparent 1px 22px);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(149, 0, 40, 0.24)),
+    url("assets/ucema-template-cover.jpeg") center / cover no-repeat;
   color: white;
 }
 
@@ -80,8 +84,8 @@ button {
   min-width: 92px;
   height: 42px;
   padding: 0 14px;
-  background: white;
-  color: var(--ucema-burgundy);
+  background: var(--ucema-burgundy);
+  color: white;
   font-weight: 800;
   letter-spacing: 0;
 }
@@ -108,7 +112,7 @@ button {
 .access-copy h1 {
   max-width: 760px;
   margin: 0;
-  font-size: clamp(2.4rem, 6vw, 5.6rem);
+  font-size: clamp(2.4rem, 6vw, 5.2rem);
   line-height: 0.96;
 }
 
@@ -241,6 +245,9 @@ textarea {
 .workspace {
   min-height: 100vh;
   padding: 22px;
+  background:
+    linear-gradient(90deg, rgba(149, 0, 40, 0.05), transparent 42%),
+    var(--paper);
 }
 
 .workspace-header {
@@ -271,6 +278,7 @@ textarea {
 .builder-title h2 {
   margin: 0;
   font-size: 2rem;
+  color: var(--ucema-burgundy);
 }
 
 .predictive-grid {
@@ -295,7 +303,7 @@ textarea {
   text-align: center;
   border: 1px dashed var(--ucema-burgundy);
   border-radius: 8px;
-  background: #fffafb;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f4f7 100%);
   color: var(--ink);
 }
 
@@ -338,8 +346,8 @@ textarea {
 .analysis-status {
   padding: 10px 12px;
   border-radius: 6px;
-  background: #f5fbfc;
-  color: var(--cyan);
+  background: #f6f4f6;
+  color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.4;
 }
@@ -433,6 +441,7 @@ textarea {
   padding: 18px;
   display: grid;
   gap: 18px;
+  background: linear-gradient(90deg, white 0 82%, var(--rail) 82% 100%);
 }
 
 .preview-header {
@@ -460,11 +469,12 @@ textarea {
   background: white;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  position: relative;
 }
 
 .slide-header {
   padding: 18px;
-  background: var(--ucema-burgundy);
+  background: linear-gradient(90deg, var(--ucema-burgundy-dark), var(--ucema-burgundy));
   color: white;
   display: flex;
   justify-content: space-between;
@@ -475,6 +485,8 @@ textarea {
 
 .slide-body {
   padding: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .slide-body h4 {
@@ -493,6 +505,143 @@ textarea {
   color: var(--muted);
   border-top: 1px solid var(--line);
   font-size: 0.84rem;
+}
+
+.slide-card.layout-cover {
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.35), rgba(149, 0, 40, 0.14)),
+    url("assets/ucema-template-cover.jpeg") center / cover no-repeat;
+}
+
+.slide-card.layout-cover .slide-header,
+.slide-card.layout-cover .slide-footer {
+  background: transparent;
+  border: 0;
+  color: white;
+}
+
+.slide-card.layout-cover .slide-body {
+  align-self: center;
+  justify-self: end;
+  width: 58%;
+}
+
+.slide-card.layout-cover .slide-body h4 {
+  color: white;
+  font-size: 1.7rem;
+}
+
+.slide-card.layout-cover .slide-body ul {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.slide-card.layout-title {
+  background: linear-gradient(90deg, var(--ucema-rose) 0%, var(--ucema-burgundy) 76%, white 76% 100%);
+  color: white;
+}
+
+.slide-card.layout-title .slide-header,
+.slide-card.layout-title .slide-footer {
+  background: transparent;
+  border: 0;
+  color: white;
+}
+
+.slide-card.layout-title .slide-body {
+  align-self: end;
+  padding-bottom: 34px;
+  width: 76%;
+}
+
+.slide-card.layout-title .slide-body h4,
+.slide-card.layout-section .slide-body h4 {
+  color: white;
+  font-size: 1.7rem;
+}
+
+.slide-card.layout-title .slide-body ul,
+.slide-card.layout-section .slide-body ul {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.slide-card.layout-content::after,
+.slide-card.layout-chart::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16%;
+  height: 100%;
+  background: var(--rail);
+}
+
+.slide-card.layout-section {
+  background: linear-gradient(90deg, white 0 52%, var(--ucema-burgundy) 52% 100%);
+}
+
+.slide-card.layout-section .slide-header,
+.slide-card.layout-section .slide-footer {
+  background: transparent;
+  border: 0;
+  color: var(--ucema-burgundy);
+}
+
+.slide-card.layout-section .slide-body {
+  margin-left: 48%;
+  color: white;
+}
+
+.slide-card.layout-chart .slide-body::before {
+  content: "Espacio para grafico o foto";
+  position: absolute;
+  left: 20px;
+  top: 76px;
+  width: 54%;
+  height: 48%;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.slide-card.layout-chart .slide-body ul {
+  margin-left: 60%;
+}
+
+.slide-card.layout-closing {
+  background: white;
+}
+
+.slide-card.layout-closing .slide-header {
+  background: transparent;
+  color: var(--ucema-burgundy);
+}
+
+.slide-card.layout-closing .slide-body h4 {
+  color: var(--ucema-burgundy);
+  font-size: 1.65rem;
+}
+
+.slide-card.layout-closing .slide-body ul {
+  color: var(--muted);
+}
+
+.slide-card.layout-closing::after {
+  content: "UCEMA";
+  position: absolute;
+  right: 28px;
+  bottom: 26px;
+  width: 74px;
+  height: 44px;
+  display: grid;
+  place-items: end center;
+  padding-bottom: 6px;
+  background: var(--ucema-burgundy);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 @media (max-width: 1100px) {
